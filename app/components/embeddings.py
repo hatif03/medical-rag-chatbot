@@ -5,12 +5,12 @@ from app.common.custom_exception import CustomException
 
 logger = get_logger(__name__)
 
-def get_embeddings():
+def get_embedding_model():
     try:
         logger.info("Initialising hugginface embeddings model")
-        embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2", model_kwargs={"device": "cpu"})
+        embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2", model_kwargs={"device": "cpu"})
         logger.info("Embeddings model loaded successfully")
-        return embeddings
+        return embedding_model
     
     except Exception as e:
         error_message = CustomException("Failed to load embeddings model")
