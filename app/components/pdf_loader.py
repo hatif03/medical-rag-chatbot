@@ -1,5 +1,5 @@
 import os
-from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
+from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader, PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from app.common.logger import get_logger
@@ -16,7 +16,7 @@ def load_pdf_files():
 
         logger.info(f"Loading PDF files from {DATA_PATH}")
 
-        loader = DirectoryLoader(DATA_PATH, glob="*.pdf", loader_cls=PyPDFLoader)
+        loader = PyPDFDirectoryLoader(DATA_PATH, glob="*.pdf")
 
         documents = loader.load()
 

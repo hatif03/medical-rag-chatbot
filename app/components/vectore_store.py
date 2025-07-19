@@ -36,6 +36,7 @@ def save_vector_store(text_chunks):
         logger.info(f"Saving vector store to {DB_FAISS_PATH}")
         vector_store.save_local(DB_FAISS_PATH)
         logger.info(f"Vector store saved successfully to {DB_FAISS_PATH}")
+        return vector_store
 
     except Exception as e:
         error_message = CustomException("Failed to save vector store", e)
