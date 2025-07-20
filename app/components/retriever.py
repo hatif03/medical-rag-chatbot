@@ -8,7 +8,6 @@ from app.components.llm import load_llm
 
 from app.common.custom_exception import CustomException
 from app.common.logger import get_logger
-from app.config.config import HF_TOKEN, HUGGINGFACE_REPO_ID
 
 logger = get_logger(__name__)
 
@@ -37,12 +36,12 @@ def create_qa_chain():
         if db is None:
             raise CustomException("Vector store not present or empty.")
 
-        llm = load_llm(hf_repo_id=HUGGINGFACE_REPO_ID, hf_token=HF_TOKEN)
+        llm = load_llm()
 
         if llm is None:
             raise CustomException("LLM not loaded")
 
-        qa_chain = RetrievalQA.from_chain_typr(
+        qa_chain = RetrievalQA.from_chain_type(
             llm = llm,
             chain_type = "stuff",
             retriever = db.as_retriever(search_kwargs={'k':1}),
